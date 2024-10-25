@@ -1,0 +1,15 @@
+model Compose {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    
+    quantity Int
+    unit String
+
+    recipeId String @db.ObjectId
+    recipe Recipe @relation(fields: [recipeId], references: [id])
+
+    ingredientId String @db.ObjectId
+    ingredient Ingredient @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+
+    @@index([recipeId])
+    @@index([ingredientId])
+}

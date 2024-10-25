@@ -1,0 +1,9 @@
+model Step {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    
+    instruction String
+    stepNumber Int @unique
+
+    recipeId String @db.ObjectId
+    recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+}
