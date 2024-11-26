@@ -3,19 +3,121 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Couleurs du thème clair par défaut */
+  --Text__semantic__success: rgba(92, 181, 77, 0.8);
+  --Text__neutral__high: #1b1b1b;
+  --Text__semantic__warning: #eb5653;
+  --Text__neutral__base: #363636;
+  --Text__neutral__low: rgba(87, 87, 87, 0.7);
+  --Stroke__semantic__warning: #eb5653;
+  --Stroke__semantic__success: rgba(92, 181, 77, 0.8);
+  --Surface__primary__base: #5cb54d;
+  --Surface__neutral__base: #ffffff;
+  --Surface__neutral__high: #f7f8fa;
+  --Surface__neutral__low: #edeef0;
+  --Surface__semantic__warning: #eb5653;
+  --Surface__semantic__success: rgba(92, 181, 77, 0.8);
+  --Stroke__neutral__high: #1b1b1b;
+  --Stroke__neutral__base: #363636;
+  --Stroke__neutral__low: rgba(87, 87, 87, 0.7);
+  --Icons__base: #5a656f;
+  --Stroke__neutral__light: #d3d9e1;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --Text__semantic__success: rgba(92, 181, 77, 0.8);
+    --Text__neutral__high: #f3f6f9;
+    --Text__semantic__warning: #eb5653;
+    --Text__neutral__base: #cfd5df;
+    --Text__neutral__low: rgba(205, 217, 231, 0.7);
+    --Stroke__semantic__warning: #eb5653;
+    --Stroke__semantic__success: rgba(5, 123, 0, 0.8);
+    --Surface__primary__base: #057b00;
+    --Surface__neutral__base: #212830;
+    --Surface__neutral__high: #141b23;
+    --Surface__neutral__low: #282f37;
+    --Surface__semantic__warning: #eb5653;
+    --Surface__semantic__success: rgba(92, 181, 77, 0.8);
+    --Stroke__neutral__high: #f3f6f9;
+    --Stroke__neutral__base: #cfd5df;
+    --Stroke__neutral__low: rgba(205, 217, 231, 0.7);
+    --Icons__base: #8f959f;
+    --Stroke__neutral__light: #3d434d;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: var(--Text__neutral__base);
+  background: var(--Surface__neutral__base);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Recipe Card */
+
+.recipe-card {
+  background-color: var(--Surface__neutral__high);
+  width: fit-content;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+
+  .card-image {
+
+    .vegan-healthy {
+      display: flex;
+      gap: 0.5rem;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(255, 255, 255, 0.70);
+      padding: 8px 12px;
+      border-radius: 25px;
+      color: #33a947;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .card-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    span {
+      font-size: 1.2rem;
+      color: var(--Text__neutral__base);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    span.Starter {
+      background-color: rgb(56, 110, 56);
+    }
+
+    span.Main {
+      background-color: rgb(56, 56, 110);
+    }
+    
+    span.Dessert {
+      background-color: rgb(110, 56, 56);
+    }
+
+    p {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
 }
