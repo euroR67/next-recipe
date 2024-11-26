@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { RecipeWithRelations } from '../types/types';
-import { Clock11, HeartPulse, Vegan } from 'lucide-react';
+import { ArrowRight, Clock11, HeartPulse, Vegan } from 'lucide-react';
 
 interface RecipeCardProps {
     recipe: RecipeWithRelations;
@@ -30,7 +30,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
                     {recipe.category.name}
                 </span>
                 <p><Clock11 size={16} /> {recipe.duration} min</p>
-                <Link href="{`/recipes/${recipe.id}`}">View recipe</Link>
+                <Link href="{`/recipes/${recipe.id}`}">View recipe <ArrowRight size={16} /></Link>
             </div>
         </div>
     )

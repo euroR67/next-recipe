@@ -1,4 +1,5 @@
 import RecipeCard from "@/components/RecipeCard";
+import RecipeSwiper from "@/components/RecipeSwiper";
 import prisma from "@/lib/db";
 
 export default async function Home() {
@@ -17,9 +18,7 @@ export default async function Home() {
 
   return (
     <>
-      {recipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
-      ))}
+      <RecipeSwiper recipes={recipes} />
     </>
   );
 }
