@@ -1,4 +1,3 @@
-import RecipeCard from "@/components/RecipeCard";
 import RecipeSwiper from "@/components/RecipeSwiper";
 import prisma from "@/lib/db";
 

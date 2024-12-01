@@ -30,7 +30,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
                     {recipe.category.name}
                 </span>
                 <p><Clock11 size={16} /> {recipe.duration} min</p>
-                <Link href="{`/recipes/${recipe.id}`}">View recipe <ArrowRight size={16} /></Link>
+                <Link href={`/recipe/${recipe.id}`}>View recipe <ArrowRight size={16} /></Link>
             </div>
         </div>
     )
