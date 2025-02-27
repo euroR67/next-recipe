@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 export interface RecipeWithRelations {
     id: string;
     title: string;
@@ -8,8 +7,10 @@ export interface RecipeWithRelations {
     duration: number;
     isHealthy: boolean;
     isVegan: boolean;
+    difficulty: number;
     createdAt: Date;
     updatedAt: Date;
+    categoryId: string;
     category: Category;
     recipeTools: RecipeTool[];
     steps: Step[];
@@ -20,32 +21,44 @@ interface Compose {
     id: string;
     quantity: number;
     unit: string;
+    recipeId: string;
+    recipe: RecipeWithRelations;
+    ingredientId: string;
     ingredient: Ingredient;
 }
 
 interface Ingredient {
     id: string;
     name: string;
-    slug: string;
-    createdAt: Date;
-    updatedAt: Date;
+    image: string;
+    recipes: Compose[];
 }
 
 interface Category {
     id: string;
     name: string;
+    recipes: RecipeWithRelations[];
 }
 
 interface Step {
     id: string;
-    description: string;
+    instruction: string;
     stepNumber: number;
+    recipeId: string;
+    recipe: RecipeWithRelations;
 }
 
 interface RecipeTool {
     id: string;
+    recipeId: string;
+    recipe: RecipeWithRelations;
+    toolId: string;
+    tool: Tool;
+}
+
+interface Tool {
+    id: string;
     name: string;
-    slug: string;
-    createdAt: Date;
-    updatedAt: Date;
+    image: string;
+    recipeTools: RecipeTool[];
 }

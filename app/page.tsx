@@ -1,11 +1,16 @@
 import RecipeSwiper from "@/components/RecipeSwiper";
 import prisma from "@/lib/db";
+import { RecipeWithRelations } from "@/types/types";
 
 export default async function Home() {
-  const recipes = await prisma.recipe.findMany({
+  const recipes: RecipeWithRelations[] = await prisma.recipe.findMany({
     include: {
       category: true,
-      recipeTools: true,
+      recipeTools: {
+        include: {
+          tool: true,
+        },
+      },
       steps: true,
       compositions: {
         include: {

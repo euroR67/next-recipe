@@ -6,6 +6,7 @@ model Recipe {
     duration    Int
     isHealthy   Boolean
     isVegan     Boolean
+    difficulty  Int
     slug        String  @unique
 
     createdAt DateTime @default(now())
