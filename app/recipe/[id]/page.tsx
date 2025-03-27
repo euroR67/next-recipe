@@ -1,6 +1,7 @@
 import prisma from "@/lib/db";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import Image from "next/image";
-import { Clock11, Gauge } from 'lucide-react';
+import { Clock11, Gauge, Download, Heart, ListTodo, CookingPot } from 'lucide-react';
 
 interface Params {
     id: string;
@@ -37,58 +38,90 @@ export default async function RecipeDetail({ params }: { params: Promise<Params>
     }
 
     return (
-        <>
+        <main className="recipe-detail">
             <section className="hero">
-                <div>
-                    {recipe && (
-                        <div>
-                            <Image src={recipe.image} alt={recipe.title} width={300} height={200} />
-                        </div>
-                    )}
+                <div className="left">
                     <h1>{recipe?.title}</h1>
-                    <span className={`category ${recipe?.category.name}`}>
-                        {recipe?.category.name}
-                    </span>
-                    <p><Clock11 size={16} /> {recipe.duration} min</p>
-                    <div className='difficulty'>
-                        {[...Array(5)].map((_, index) => {
-                            let color = '#ffffff';
-                            if (recipe.difficulty >= 1 && recipe.difficulty <= 2 && index < 2) {
-                                color = '#33a947';
-                            } else if (recipe.difficulty >= 3 && recipe.difficulty <= 4 && index < recipe.difficulty) {
-                                color = '#ff8c00';
-                            } else if (recipe.difficulty === 5 && index < 5) {
-                                color = '#df1666';
-                            }
-                            return <Gauge key={index} color={color} />;
-                        })}
+                    <div>
+                        <span className={`category ${recipe?.category.name}`}>
+                            {recipe?.category.name}
+                        </span>
+                        <p><Clock11 size={16} /> {recipe.duration} min</p>
+                        <div className='difficulty'>
+                            {[...Array(5)].map((_, index) => {
+                                let color = '#ffffff';
+                                if (recipe.difficulty >= 1 && recipe.difficulty <= 2 && index < 2) {
+                                    color = '#33a947';
+                                } else if (recipe.difficulty >= 3 && recipe.difficulty <= 4 && index < recipe.difficulty) {
+                                    color = '#ff8c00';
+                                } else if (recipe.difficulty === 5 && index < 5) {
+                                    color = '#df1666';
+                                }
+                                return <Gauge key={index} color={color} />;
+                            })}
+                        </div>
                     </div>
-                    <div className="instruction">
-                        <h2>Instructions</h2>
+                    <div className="btns">
+                        <button><Download /> Download</button>
+                        <button><Heart />Favorite</button>
+                    </div>
+                </div>
+                {recipe && (
+                    <div className="right">
+                        <Image src={recipe.image} alt={recipe.title} width={1000} height={1000} />
+                    </div>
+                )}
+            </section >
+
+            <section className="content">
+                <div className="instruction-ingredient">
+                    <article>
+                        <h2><ListTodo />Instructions</h2>
                         <p>{recipe.instruction}</p>
-                    </div>
-                    <div className="ingredient">
-                        <h2>Ingredients</h2>
-                        <ul>
-                            {recipe.compositions.map((composition) => (
-                                <li key={composition.id}>
-                                    {composition.quantity} {composition.unit} {composition.ingredient.name}
-                                    <Image src={composition.ingredient.image} alt={composition.ingredient.name} width={50} height={50} />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="tools">
-                        <h2>Tools</h2>
-                        <ul>
-                            {recipe.recipeTools.map((tool) => (
-                                <li key={tool.id}>
-                                    {tool.tool.name}
-                                    <Image src={tool.tool.image} alt={tool.tool.name} width={50} height={50} />
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    </article>
+                    <aside>
+                        <h2><CookingPot />Ingredients and Tools</h2>
+                        <TabGroup className="tab">
+                            <TabList className="tab-list">
+                                <Tab className="tab">Ingrédients</Tab>
+                                <Tab className="tab">Outils</Tab>
+                            </TabList>
+                            <TabPanels>
+                                <TabPanel>
+                                    <ul className="ingredients">
+                                        {recipe.compositions.map((composition) => (
+                                            <li key={composition.id}>
+                                                <Image
+                                                    src={composition.ingredient.image}
+                                                    alt={composition.ingredient.name}
+                                                    width={500}
+                                                    height={500}
+                                                />
+                                                <p>{composition.ingredient.name}</p>
+                                                <span>{composition.quantity} {composition.unit}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </TabPanel>
+                                <TabPanel>
+                                    <ul className="tools">
+                                        {recipe.recipeTools.map((tool) => (
+                                            <li key={tool.id}>
+                                                <Image
+                                                    src={tool.tool.image}
+                                                    alt={tool.tool.name}
+                                                    width={500}
+                                                    height={500}
+                                                />
+                                                <p>{tool.tool.name}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </TabPanel>
+                            </TabPanels>
+                        </TabGroup>
+                    </aside>
+
                 </div>
 
                 <div className="steps">
@@ -116,6 +149,6 @@ export default async function RecipeDetail({ params }: { params: Promise<Params>
                         ))}
                 </div>
             </section >
-        </>
+        </main>
     );
 }
