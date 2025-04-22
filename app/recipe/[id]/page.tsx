@@ -2,9 +2,10 @@ import prisma from "@/lib/db";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import Image from "next/image";
 import Link from 'next/link';
-import { Clock11, Gauge, Heart, ListTodo, CookingPot, ArrowRight, Lightbulb } from 'lucide-react';
+import { Clock11, Gauge, ListTodo, CookingPot, ArrowRight, Lightbulb } from 'lucide-react';
 import StepSwiper from "@/components/StepSwiper";
 import DownloadPDFButton from "@/components/DownloadPDFButton";
+import FavoriteButton from "@/components/FavoriteButton";
 
 interface Params {
     id: string;
@@ -67,7 +68,7 @@ export default async function RecipeDetail({ params }: { params: Promise<Params>
                     <div className="btns">
 
                         <DownloadPDFButton recipe={recipe} />
-                        <button><Heart />Favori</button>
+                        <FavoriteButton recipeId={recipe.id} />
                     </div>
                 </div>
                 {recipe && (
