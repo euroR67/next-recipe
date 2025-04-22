@@ -331,6 +331,51 @@ body {
       }
     }
 
-    div.steps {}
+    div.step-slide {
+      background-color: var(--Surface__neutral__high);
+      padding: 50px;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    div.step-swiper>h2 {
+      margin-block: 20px;
+      color: #f7684f;
+    }
+
+    div.suggestion {
+
+      h2 {
+        margin-block: 20px;
+        color: #f7684f;
+      }
+
+      >div {
+        display: flex;
+        gap: 20px;
+      }
+
+      li {
+        background-color: var(--Surface__neutral__high);
+        width: 130px;
+        border-radius: 10px;
+
+        img {
+          object-fit: cover;
+          height: 120px;
+          width: 100%;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        }
+
+        div {
+          padding: 10px;
+
+          a {
+            color: var(--Text__neutral__base);
+          }
+        }
+      }
+    }
   }
 }

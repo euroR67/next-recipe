@@ -1,7 +1,9 @@
 import prisma from "@/lib/db";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import Image from "next/image";
-import { Clock11, Gauge, Download, Heart, ListTodo, CookingPot } from 'lucide-react';
+import Link from 'next/link';
+import { Clock11, Gauge, Download, Heart, ListTodo, CookingPot, ArrowRight, Lightbulb } from 'lucide-react';
+import StepSwiper from "@/components/StepSwiper";
 
 interface Params {
     id: string;
@@ -125,28 +127,26 @@ export default async function RecipeDetail({ params }: { params: Promise<Params>
                 </div>
 
                 <div className="steps">
-                    <h2>Steps ({recipe.steps.length})</h2>
-                    <ol>
-                        {recipe.steps.sort((a, b) => a.stepNumber - b.stepNumber).map((step) => (
-                            <li key={step.id}>
-                                <h3>{step.stepNumber}. {step.instruction}</h3>
-                            </li>
-                        ))}
-                    </ol>
+                    <StepSwiper steps={recipe.steps} />
                 </div>
 
                 <div className="suggestion">
-                    <h2>Suggestions</h2>
-                    {recipe.category.recipes
-                        .filter((r: { id: string }) => r.id !== recipe.id)
-                        .sort(() => Math.random() - 0.5)
-                        .slice(0, 3)
-                        .map((suggestion: { id: string; image: string; title: string }) => (
-                            <li key={suggestion.id}>
-                                <Image src={suggestion.image} alt={suggestion.title} width={100} height={100} />
-                                <h3>{suggestion.title}</h3>
-                            </li>
-                        ))}
+                    <h2><Lightbulb /> Suggestions</h2>
+                    <div>
+                        {recipe.category.recipes
+                            .filter((r: { id: string }) => r.id !== recipe.id)
+                            .sort(() => Math.random() - 0.5)
+                            .slice(0, 3)
+                            .map((suggestion: { id: string; image: string; title: string }) => (
+                                <li key={suggestion.id}>
+                                    <Image src={suggestion.image} alt={suggestion.title} width={500} height={500} />
+                                    <div>
+                                        <h3>{suggestion.title}</h3>
+                                        <Link href={`/recipe/${suggestion.id}`}>View recipe <ArrowRight size={16} /></Link>
+                                    </div>
+                                </li>
+                            ))}
+                    </div>
                 </div>
             </section >
         </main>
