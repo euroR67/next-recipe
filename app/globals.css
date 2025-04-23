@@ -379,3 +379,19 @@ body {
     }
   }
 }
+
+/* Article list */
+
+div.article-wrapper {
+  padding: 2rem;
+
+  h1 {
+    margin-block: 20px;
+  }
+
+  div.article {
+    border: 1px solid var(--Stroke__neutral__light);
+    width: fit-content;
+    padding: 20px;
+  }
+}
