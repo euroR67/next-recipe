@@ -6,4 +6,6 @@ model Article {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    comments Comment[] @relation("ArticleToComments")
 }

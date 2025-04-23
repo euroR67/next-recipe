@@ -14,9 +14,9 @@ model Recipe {
 
     compositions Compose[]
 
-    categoryId String   @db.ObjectId
-    category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
+    categoryId  String       @db.ObjectId
+    category    Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    comments    Comment[]    @relation("RecipeToComments")
     steps       Step[]
     recipeTools RecipeTool[]
 }

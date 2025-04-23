@@ -1,0 +1,12 @@
+model Comment {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    content     String
+    date        DateTime @default(now())
+    userId      String // ID de l'utilisateur Clerk
+    relatedId   String   @db.ObjectId // ID de la ressource associée (Recipe ou Article)
+    relatedType String // Type de la ressource associée ("recipe" ou "article")
+
+    // Relations
+    recipe  Recipe?  @relation("RecipeToComments", fields: [relatedId], references: [id], onDelete: Cascade)
+    article Article? @relation("ArticleToComments", fields: [relatedId], references: [id], onDelete: Cascade)
+}
